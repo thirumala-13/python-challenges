@@ -1,3 +1,6 @@
+from unittest import result
+
+
 def fizzbuzz(n):
     """
     TODO:
@@ -24,7 +27,15 @@ def fizzbuzz(n):
 
     Hint: Use if/elif/else. The number as a string is: str(n)
     """
-    pass
+    if n % 3 == 0 and n % 5 == 0:
+        return "FizzBuzz"
+    elif n % 3 == 0:
+        return "Fizz"
+    elif n % 5 == 0:
+        return "Buzz"
+    else:
+        return str(n)
+         
 
 
 def fizzbuzz_list(start, end):
@@ -46,4 +57,7 @@ def fizzbuzz_list(start, end):
                 result.append(fizzbuzz(n))
         Step 4: Return the result list
     """
-    pass
+    result = []
+    for n in range(start, end + 1):
+        result.append(fizzbuzz(n))
+    return result

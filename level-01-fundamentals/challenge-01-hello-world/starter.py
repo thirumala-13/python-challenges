@@ -11,7 +11,8 @@ def greet(name):
 
     Hint: Use an f-string like this: f"Hello, {name}!"
     """
-    pass
+    
+    return f"Hello, {name}!"
 
 
 def describe_yourself(name, role):
@@ -27,7 +28,9 @@ def describe_yourself(name, role):
 
     Note: There is a period (.) at the end of the sentence.
     """
-    pass
+    
+    return f"My name is {name} and I am a {role}."
+    
 
 
 def format_greeting(greeting, name):
@@ -46,4 +49,4 @@ def format_greeting(greeting, name):
 
     Note: There is a comma and space between the greeting and the name.
     """
-    pass
+    return f"{greeting}, {name}!"

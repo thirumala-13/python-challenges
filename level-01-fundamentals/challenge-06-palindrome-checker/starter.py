@@ -16,7 +16,8 @@ def clean_string(text):
         Step 1: text.lower()          → converts to lowercase
         Step 2: result.replace(" ", "") → removes spaces
     """
-    pass
+    return text.lower().replace(" ", "")
+
 
 
 def is_palindrome(text):
@@ -43,4 +44,5 @@ def is_palindrome(text):
         Step 2: Compare the cleaned text to its reverse
                 cleaned == cleaned[::-1]
     """
-    pass
+    cleaned = clean_string(text)
+    return cleaned == cleaned[::-1]

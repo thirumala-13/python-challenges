@@ -17,7 +17,8 @@ def reverse_string(text):
         text[start:stop:step]
         text[::-1] means: start at end, go to beginning, step -1 (backwards)
     """
-    pass
+    return text[::-1]
+
 
 
 def reverse_words(sentence):
@@ -25,7 +26,6 @@ def reverse_words(sentence):
     TODO:
     Return the sentence with the ORDER OF WORDS reversed.
     (Not the characters — reverse the words themselves.)
-
     Examples:
         reverse_words("hello world")     should return "world hello"
         reverse_words("I love Python")   should return "Python love I"
@@ -42,4 +42,4 @@ def reverse_words(sentence):
         Step 3: Join the words back with a space between them
                 result = " ".join(words)  → "world hello"
     """
-    pass
+    return " ".join(sentence.split()[::-1])

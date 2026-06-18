@@ -14,7 +14,7 @@ def is_even(number):
     Hint: Use the modulo operator: number % 2
           If number % 2 == 0, the number is even.
     """
-    pass
+    return number % 2 == 0
 
 
 def is_odd(number):
@@ -31,7 +31,7 @@ def is_odd(number):
     Hint: A number is odd when it is NOT even.
           You can use your is_even() function here, or check number % 2 != 0.
     """
-    pass
+    return number % 2 != 0
 
 
 def classify_number(number):
@@ -48,4 +48,4 @@ def classify_number(number):
 
     Note: Return the word as a lowercase string: "even" or "odd"
     """
-    pass
+    return "even" if number % 2 == 0 else "odd"

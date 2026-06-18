@@ -11,7 +11,7 @@ def get_type_name(value):
 
     Hint: Use type(value).__name__ to get the type name as a string.
     """
-    pass
+    return type(value).__name__
 
 
 def is_integer(value):
@@ -28,7 +28,9 @@ def is_integer(value):
     Hint: Use isinstance(value, int) but watch out — bool is a subclass of int in Python!
     To exclude booleans: isinstance(value, int) and not isinstance(value, bool)
     """
-    pass
+    return isinstance(value, int) and not isinstance(value, bool)
+
+    
 
 
 def is_string(value):
@@ -44,7 +46,8 @@ def is_string(value):
 
     Hint: Use isinstance(value, str)
     """
-    pass
+    return isinstance(value, str)
+
 
 
 def convert_to_int(value):
@@ -59,7 +62,8 @@ def convert_to_int(value):
 
     Hint: Use the int() function: int("42") returns 42
     """
-    pass
+    return int(value)
+    
 
 
 def convert_to_string(value):
@@ -74,7 +78,7 @@ def convert_to_string(value):
 
     Hint: Use the str() function: str(99) returns "99"
     """
-    pass
+    return str(value)
 
 
 def add_numbers(a, b):
@@ -89,4 +93,4 @@ def add_numbers(a, b):
 
     Hint: Use the + operator.
     """
-    pass
+    return a + b

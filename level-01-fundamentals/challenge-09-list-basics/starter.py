@@ -14,7 +14,10 @@ def get_first(lst):
             return None
         return lst[0]
     """
-    pass
+    if len(lst) == 0:
+        return None
+    return lst[0]
+
 
 
 def get_last(lst):
@@ -30,7 +33,10 @@ def get_last(lst):
 
     Hint: Use a negative index: lst[-1] gives you the last item.
     """
-    pass
+    if len(lst) == 0:
+        return None
+    return lst[-1]
+
 
 
 def get_length(lst):
@@ -45,7 +51,8 @@ def get_length(lst):
 
     Hint: Use the len() function: len(lst)
     """
-    pass
+    return len(lst)
+
 
 
 def add_item(lst, item):
@@ -62,7 +69,8 @@ def add_item(lst, item):
           append() modifies the list IN PLACE and returns None,
           so you need to append first, then return the list.
     """
-    pass
+    lst.append(item)
+    return lst
 
 
 def remove_item(lst, item):
@@ -82,7 +90,9 @@ def remove_item(lst, item):
             lst.remove(item)
         return lst
     """
-    pass
+    if item in lst:
+        lst.remove(item)
+    return lst
 
 
 def sort_list(lst):
@@ -100,7 +110,7 @@ def sort_list(lst):
     Hint: Use sorted(lst) — this returns a NEW sorted list without modifying the original.
           Do NOT use lst.sort() for this — it modifies the original list in place.
     """
-    pass
+    return sorted(lst)
 
 
 def sum_list(lst):
@@ -117,4 +127,4 @@ def sum_list(lst):
 
     Hint: Use Python's built-in sum() function: sum(lst)
     """
-    pass
+    return sum(lst)
