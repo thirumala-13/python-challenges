@@ -36,7 +36,7 @@ def describe_yourself(name, role):
 def format_greeting(greeting, name):
     """
     TODO:
-    Combine a greeting word with a name and return the result.
+    Combine a greeting word with a name and return the resulkuyut.
 
     The message format must be exactly: "{greeting}, {name}!"
 
