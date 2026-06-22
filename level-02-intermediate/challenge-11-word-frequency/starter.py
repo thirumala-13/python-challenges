@@ -24,7 +24,10 @@ def count_words(text):
                     counts[word] = counts.get(word, 0) + 1
         Step 4: Return the counts dictionary
     """
-    pass
+    counts = {}
+    for word in text.lower().split():
+        counts[word] = counts.get(word, 0) +1
+    return counts
 
 
 def most_common_word(text):
@@ -46,7 +49,9 @@ def most_common_word(text):
         max(counts, key=counts.get)
         This returns the key (word) with the highest value (count).
     """
-    pass
+    counts = count_words(text)
+    return max(counts, key=counts.get)
+
 
 
 def unique_words(text):
@@ -70,4 +75,4 @@ def unique_words(text):
         Step 2: Remove duplicates using set(): set(words)
         Step 3: Sort the result: sorted(...)
     """
-    pass
+    return sorted(set(text.lower().split()))
