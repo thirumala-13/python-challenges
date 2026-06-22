@@ -25,7 +25,15 @@ def fibonacci(n):
         This is Python's way to swap and update both variables at once.
         Right side is evaluated first, THEN assigned.
     """
-    pass
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+
+    a, b = 0, 1
+    for _ in range(n - 1):
+        a, b = b, a + b
+    return b
 
 
 def fibonacci_sequence(count):
@@ -47,4 +55,11 @@ def fibonacci_sequence(count):
 
         Or use a loop with a, b = 0, 1 and append each value.
     """
-    pass
+    if count == 0:
+        return []
+    elif count == 1:
+        return [0]
+    sequence = [0, 1]
+    for _ in range(count - 2):
+        sequence.append(sequence[-1] + sequence[-2])
+    return sequence[:count]
