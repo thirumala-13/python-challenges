@@ -27,7 +27,8 @@ class BankAccount:
             self.owner = owner
             self.balance = balance
         """
-        pass
+        self.owner = owner
+        self.balance = balance
 
     def deposit(self, amount):
         """
@@ -47,7 +48,9 @@ class BankAccount:
                 raise ValueError("Deposit amount must be positive")
             self.balance += amount
         """
-        pass
+        if amount <= 0:
+            raise ValueError("Deposit amount must be positive")
+        self.balance += amount
 
     def withdraw(self, amount):
         """
@@ -63,7 +66,11 @@ class BankAccount:
             account.withdraw(200)  → raises ValueError("Insufficient funds")
             account.withdraw(-5)   → raises ValueError("Withdrawal amount must be positive")
         """
-        pass
+        if amount <= 0:
+            raise ValueError("Withdrawal amount must be positive")
+        if amount > self.balance:
+            raise ValueError("Insufficient funds")
+        self.balance -= amount
 
     def get_balance(self):
         """
@@ -74,7 +81,7 @@ class BankAccount:
             account = BankAccount("Alice", 100)
             account.get_balance()  → 100
         """
-        pass
+        return self.balance
 
     def __str__(self):
         """
@@ -92,4 +99,4 @@ class BankAccount:
         Hint: Use an f-string:
             f"BankAccount(owner='{self.owner}', balance={self.balance:.2f})"
         """
-        pass
+        return f"BankAccount(owner='{self.owner}', balance={self.balance:.2f})"
