@@ -12,7 +12,7 @@ def celsius_to_fahrenheit(celsius):
         celsius_to_fahrenheit(-40)  should return -40.0
         celsius_to_fahrenheit(37)   should return 98.6  (human body temperature)
     """
-    pass
+    return (celsius * 9/5) + 32
 
 
 def fahrenheit_to_celsius(fahrenheit):
@@ -29,7 +29,7 @@ def fahrenheit_to_celsius(fahrenheit):
         fahrenheit_to_celsius(-40)   should return -40.0
         fahrenheit_to_celsius(98.6)  should return approximately 37.0
     """
-    pass
+    return (fahrenheit - 32) * 5/9
 
 
 def celsius_to_kelvin(celsius):
@@ -44,7 +44,7 @@ def celsius_to_kelvin(celsius):
         celsius_to_kelvin(100)  should return 373.15
         celsius_to_kelvin(-273.15)  should return 0.0  (absolute zero)
     """
-    pass
+    return celsius + 273.15
 
 
 def kelvin_to_celsius(kelvin):
@@ -59,4 +59,4 @@ def kelvin_to_celsius(kelvin):
         kelvin_to_celsius(373.15)  should return 100.0
         kelvin_to_celsius(0)       should return -273.15  (absolute zero)
     """
-    pass
+    return kelvin - 273.15
