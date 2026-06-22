@@ -22,7 +22,9 @@ def factorial_recursive(n):
             # Recursive case: call yourself with a smaller number
             return n * factorial_recursive(n - 1)
     """
-    pass
+    if n <= 1:
+        return 1
+    return n * factorial_recursive(n - 1)
 
 
 def factorial_iterative(n):
@@ -42,7 +44,10 @@ def factorial_iterative(n):
             result = result * i
         return result
     """
-    pass
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
 
 
 def count_down(n):
@@ -67,4 +72,6 @@ def count_down(n):
         [3] + [2] + [1] + []
         = [3, 2, 1]
     """
-    pass
+    if n <= 0:
+        return []
+    return [n] + count_down(n - 1)
