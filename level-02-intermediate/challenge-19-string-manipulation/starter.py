@@ -11,7 +11,7 @@ def title_case(text):
 
     Hint: Python strings have a built-in .title() method!
     """
-    pass
+    return text.title()
 
 
 def count_vowels(text):
@@ -33,7 +33,11 @@ def count_vowels(text):
                 count += 1
         return count
     """
-    pass
+    count = 0
+    for char in text:
+        if char.lower() in "aeiou":
+            count += 1
+    return count
 
 
 def remove_duplicates(text):
@@ -56,7 +60,11 @@ def remove_duplicates(text):
                 add character to result
         return result
     """
-    pass
+    result = ""
+    for char in text:
+        if not result or char != result[-1]:
+            result += char
+    return result
 
 
 def truncate(text, max_length):
@@ -78,7 +86,9 @@ def truncate(text, max_length):
             return text[:max_length - 3] + "..."
         return text
     """
-    pass
+    if len(text) > max_length:
+        return text[:max_length - 3] + "..."
+    return text
 
 
 def is_anagram(word1, word2):
@@ -101,4 +111,8 @@ def is_anagram(word1, word2):
                 sorted1 = sorted(clean1)
         Step 3: Compare — if sorted characters are equal, they're anagrams
     """
-    pass
+    clean1 = word1.lower().replace(" ", "")
+    clean2 = word2.lower().replace(" ", "")
+    sorted1 = sorted(clean1)
+    sorted2 = sorted(clean2)
+    return sorted1 == sorted2
