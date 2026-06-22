@@ -16,7 +16,10 @@ def calculate_average(scores):
 
         Don't forget to handle the empty list case first!
     """
-    pass
+    if len(scores) == 0:
+        return 0.0
+    average = sum(scores) / len(scores)
+    return round(average, 2)
 
 
 def get_letter_grade(score):
@@ -46,7 +49,16 @@ def get_letter_grade(score):
         elif score >= 80:
             ...
     """
-    pass
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
 
 
 def create_report(student_name, scores):
@@ -82,4 +94,12 @@ def create_report(student_name, scores):
     Hint: Use your calculate_average() and get_letter_grade() functions inside this one.
           Build and return a dictionary: {"name": student_name, "scores": scores, ...}
     """
-    pass
+    
+    average = calculate_average(scores)
+    grade = get_letter_grade(average)
+    return {
+        "name": student_name,
+        "scores": scores,
+        "average": average,
+        "grade": grade
+    }
