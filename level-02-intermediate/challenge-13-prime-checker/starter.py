@@ -31,7 +31,14 @@ def is_prime(n):
     it must also have a factor smaller than sqrt(n).
     So we only need to check up to sqrt(n).
     """
-    pass
+    
+    if n < 2:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
+    
 
 
 def get_primes(limit):
@@ -53,4 +60,8 @@ def get_primes(limit):
                 primes.append(n)
         return primes
     """
-    pass
+    primes = []
+    for n in range(2, limit + 1):
+        if is_prime(n):
+            primes.append(n)
+    return primes
