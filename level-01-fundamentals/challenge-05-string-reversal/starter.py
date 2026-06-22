@@ -17,7 +17,7 @@ def reverse_string(text):
         text[start:stop:step]
         text[::-1] means: start at end, go to beginning, step -1 (backwards)
     """
-    pass
+    return text[::-1]
 
 
 def reverse_words(sentence):
@@ -42,4 +42,6 @@ def reverse_words(sentence):
         Step 3: Join the words back with a space between them
                 result = " ".join(words)  → "world hello"
     """
-    pass
+    words = sentence.split()
+    words.reverse()
+    return " ".join(words)
