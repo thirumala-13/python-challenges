@@ -13,7 +13,7 @@ def generate_secret_number(min_val, max_val):
     Hint: Use random.randint(min_val, max_val)
           randint is "inclusive" — both min and max can be returned.
     """
-    pass
+    return random.randint(min_val, max_val)
 
 
 def check_guess(secret, guess):
@@ -33,7 +33,12 @@ def check_guess(secret, guess):
 
     Hint: Use if/elif/else comparing guess to secret.
     """
-    pass
+    if guess < secret:
+        return "too_low"
+    elif guess > secret:
+        return "too_high"
+    else:
+        return "correct"
 
 
 def play_round(secret, guess, attempts):
@@ -59,7 +64,14 @@ def play_round(secret, guess, attempts):
 
     Hint: Use check_guess(secret, guess) to get the result, then build the dict.
     """
-    pass
+    result = check_guess(secret, guess)
+    game_over = result == "correct"
+    return {
+        "guess": guess,
+        "result": result,
+        "attempts": attempts,
+        "game_over": game_over
+    }
 
 
 def calculate_score(attempts, max_attempts):
@@ -84,4 +96,6 @@ def calculate_score(attempts, max_attempts):
 
     You can use any formula that gives 100 for attempts=1 and 0 for attempts=max_attempts.
     """
-    pass
+    remaining = max_attempts - attempts
+    score = int(100 * remaining / (max_attempts - 1))
+    return max(0, score)
