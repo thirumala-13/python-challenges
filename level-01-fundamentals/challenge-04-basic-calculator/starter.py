@@ -9,7 +9,7 @@ def add(a, b):
         add(0, 0)    should return 0
         add(1.5, 2)  should return 3.5
     """
-    pass
+    return a + b
 
 
 def subtract(a, b):
@@ -22,7 +22,7 @@ def subtract(a, b):
         subtract(0, 5)   should return -5
         subtract(5, 5)   should return 0
     """
-    pass
+    return a - b
 
 
 def multiply(a, b):
@@ -35,7 +35,7 @@ def multiply(a, b):
         multiply(-2, 3)  should return -6
         multiply(0, 99)  should return 0
     """
-    pass
+    return a * b
 
 
 def divide(a, b):
@@ -54,7 +54,9 @@ def divide(a, b):
         if b == 0:
             return None
     """
-    pass
+    if b == 0:
+        return None
+    return a / b
 
 
 def calculate(a, operator, b):
@@ -84,4 +86,14 @@ def calculate(a, operator, b):
         elif operator == "-":
             ...
     """
-    pass
+    if operator == "+":
+        return add(a, b)
+    elif operator == "-":
+        return subtract(a, b)
+    elif operator == "*":
+        return multiply(a, b)
+    elif operator == "/":
+        return divide(a, b)
+    else:
+        return None
+    
