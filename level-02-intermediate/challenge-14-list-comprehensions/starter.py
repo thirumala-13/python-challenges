@@ -11,7 +11,7 @@ def double_numbers(numbers):
 
     Hint: [x * 2 for x in numbers]
     """
-    pass
+    return [x * 2 for x in numbers]
 
 
 def filter_evens(numbers):
@@ -27,7 +27,8 @@ def filter_evens(numbers):
 
     Hint: [x for x in numbers if x % 2 == 0]
     """
-    pass
+    return [x for x in numbers if x % 2 == 0]
+
 
 
 def squares(numbers):
@@ -43,7 +44,7 @@ def squares(numbers):
 
     Hint: x ** 2 squares a number (or x * x)
     """
-    pass
+    return [x ** 2 for x in numbers]
 
 
 def filter_long_words(words, min_length):
@@ -65,7 +66,7 @@ def filter_long_words(words, min_length):
     Hint: Use len(word) >= min_length as the condition.
           [word for word in words if len(word) >= min_length]
     """
-    pass
+    return [word for word in words if len(word) >= min_length]
 
 
 def uppercase_words(words):
@@ -87,4 +88,4 @@ def uppercase_words(words):
     Hint: word.upper() converts a string to uppercase.
           [word.upper() for word in words]
     """
-    pass
+    return [word.upper() for word in words]
