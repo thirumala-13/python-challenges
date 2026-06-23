@@ -35,7 +35,12 @@ def timer(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         # TODO: Record start time, call func, record end time, print elapsed, return result
-        pass
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        elapsed = end - start
+        print(f"{func.__name__} took {elapsed:.2f} seconds")
+        return result
     return wrapper
 
 
@@ -65,7 +70,10 @@ def logger(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         # TODO: Print the "Calling..." message, call func, print the "returned" message, return result
-        pass
+        print(f"Calling {func.__name__} with args={args} kwargs={kwargs}")
+        result = func(*args, **kwargs)
+        print(f"{func.__name__} returned {result}")
+        return result
     return wrapper
 
 
@@ -94,5 +102,8 @@ def validate_positive(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         # TODO: Check each argument, raise ValueError if any is not positive, then call func
-        pass
+        for arg in args:
+            if arg <= 0:
+                raise ValueError("All arguments must be positive")
+        return func(*args, **kwargs)
     return wrapper
