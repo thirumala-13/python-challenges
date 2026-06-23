@@ -1,3 +1,4 @@
+import email
 import re
 
 
@@ -23,7 +24,9 @@ def is_valid_email(email):
     Hint: Pattern: r'^[\w.+-]+@[\w-]+\.[\w.]+$'
     Use re.match() and check if the result is not None.
     """
-    pass
+    pattern = r'^[\w.+-]+@[\w-]+\.[\w.]+$'
+    return re.match(pattern, email) is not None
+
 
 
 def extract_numbers(text):
@@ -40,7 +43,7 @@ def extract_numbers(text):
     Hint: re.findall(r'\d+', text)
           \d matches a digit, + means one or more.
     """
-    pass
+    return re.findall(r'\d+', text)
 
 
 def is_valid_phone(phone):
@@ -63,7 +66,8 @@ def is_valid_phone(phone):
 
     Hint: Pattern: r'^\+\d{2}-\d{3}-\d{3}-\d{4}$'
     """
-    pass
+    pattern = r'^\+\d{2}-\d{3}-\d{3}-\d{4}$'
+    return re.match(pattern, phone) is not None
 
 
 def replace_whitespace(text):
@@ -82,7 +86,7 @@ def replace_whitespace(text):
           + means one or more
           Replace all such sequences with a single space ' '
     """
-    pass
+    return re.sub(r'[ \t]+', ' ', text)
 
 
 def extract_hashtags(text):
@@ -105,4 +109,5 @@ def extract_hashtags(text):
           # is literal hash character
           \w+ is one or more word characters (letters, digits, underscore)
     """
-    pass
+    return re.findall(r'#\w+', text)
+
