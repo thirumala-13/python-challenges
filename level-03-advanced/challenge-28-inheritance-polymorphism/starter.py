@@ -16,7 +16,8 @@ class Shape:
         """
         TODO: Store color as self.color
         """
-        pass
+        self.color = color
+
 
     def area(self):
         """
@@ -25,13 +26,13 @@ class Shape:
 
         raise NotImplementedError("Subclasses must implement area()")
         """
-        pass
+        raise NotImplementedError("Subclasses must implement area()")
 
     def perimeter(self):
         """
         TODO: Raise NotImplementedError.
         """
-        pass
+        raise NotImplementedError("Subclasses must implement perimeter()")
 
     def describe(self):
         """
@@ -46,7 +47,7 @@ class Shape:
         Hint:
             f"A {self.color} {type(self).__name__} with area {self.area():.2f}"
         """
-        pass
+        return f"A {self.color} {type(self).__name__} with area {self.area():.2f}"
 
 
 class Circle(Shape):
@@ -64,15 +65,17 @@ class Circle(Shape):
 
     def __init__(self, color, radius):
         # TODO: Call super().__init__(color), then store self.radius = radius
-        pass
+        super().__init__(color)
+        self.radius = radius
 
     def area(self):
         # TODO: Return math.pi * self.radius ** 2
-        pass
+        return math.pi * self.radius ** 2       
+    
 
     def perimeter(self):
         # TODO: Return 2 * math.pi * self.radius
-        pass
+        return 2 * math.pi * self.radius    
 
 
 class Rectangle(Shape):
@@ -90,15 +93,18 @@ class Rectangle(Shape):
 
     def __init__(self, color, width, height):
         # TODO: Call super().__init__(color), store width and height
-        pass
+        super().__init__(color)
+        self.width = width
+        self.height = height
+
 
     def area(self):
         # TODO: Return self.width * self.height
-        pass
+        return self.width * self.height
 
     def perimeter(self):
         # TODO: Return 2 * (self.width + self.height)
-        pass
+        return 2 * (self.width + self.height)
 
 
 class Triangle(Shape):
@@ -119,12 +125,16 @@ class Triangle(Shape):
 
     def __init__(self, color, a, b, c):
         # TODO: Call super().__init__(color), store self.a, self.b, self.c
-        pass
+        super().__init__(color)
+        self.a = a
+        self.b = b
+        self.c = c
 
     def area(self):
         # TODO: Implement Heron's formula
-        pass
+        s = (self.a + self.b + self.c) / 2
+        return math.sqrt(s * (s - self.a) * (s - self.b) * (s - self.c))     
 
     def perimeter(self):
         # TODO: Return self.a + self.b + self.c
-        pass
+        return self.a + self.b + self.c
