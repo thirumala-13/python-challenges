@@ -32,12 +32,14 @@ class Timer:
 
     def __enter__(self):
         # TODO: Record start time and return self
-        pass
+        self.start = time.time()
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         # TODO: Calculate elapsed time and store in self.elapsed
         # Return False to not suppress exceptions
-        pass
+        self.elapsed = time.time() - self.start
+        return False
 
 
 @contextmanager
@@ -60,7 +62,8 @@ def managed_list():
             yield items      # give it to the caller
             # after yield, items contains what the caller added
     """
-    pass
+    items = []
+    yield items
 
 
 class suppress_errors:
@@ -95,12 +98,14 @@ class suppress_errors:
 
     def __init__(self, *exception_types):
         # TODO: Store the exception types
-        pass
+        self.exception_types = exception_types
+
 
     def __enter__(self):
         # TODO: Return self
-        pass
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         # TODO: Return True if exc_type is one of the suppressed types, False otherwise
-        pass
+        if exc_type is not None and issubclass(exc_type, self.exception_types):
+            return True  # suppress the exception
