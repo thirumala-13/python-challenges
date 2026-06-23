@@ -16,7 +16,9 @@ def write_file(filepath, content):
         with open(filepath, "w") as f:
             f.write(content)
     """
-    pass
+    with open(filepath, "w") as f:
+        f.write(content)
+
 
 
 def read_file(filepath):
@@ -32,7 +34,9 @@ def read_file(filepath):
         with open(filepath, "r") as f:
             return f.read()
     """
-    pass
+    with open(filepath, "r") as f:
+        return f.read()
+    
 
 
 def count_lines(filepath):
@@ -52,7 +56,9 @@ def count_lines(filepath):
         Read all lines with f.readlines() or f.read().split('\n')
         Count only non-empty lines: [line for line in lines if line.strip()]
     """
-    pass
+    with open(filepath, "r") as f:
+        lines = f.readlines()
+    return len([line for line in lines if line.strip()])
 
 
 def write_csv(filepath, headers, rows):
@@ -72,7 +78,12 @@ def write_csv(filepath, headers, rows):
             for row in rows:
                 writer.writerow(row)
     """
-    pass
+    with open(filepath, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(headers)
+        for row in rows:
+            writer.writerow(row)
+
 
 
 def read_csv(filepath):
@@ -95,7 +106,10 @@ def read_csv(filepath):
             reader = csv.DictReader(f)
             return list(reader)
     """
-    pass
+    with open(filepath, "r") as f:
+        reader = csv.DictReader(f)
+        return list(reader)
+    
 
 
 def search_in_file(filepath, keyword):
@@ -121,4 +135,6 @@ def search_in_file(filepath, keyword):
             lines = f.readlines()
         return [line.strip() for line in lines if keyword in line]
     """
-    pass
+    with open(filepath, "r") as f:
+        lines = f.readlines()
+    return [line.strip() for line in lines if keyword in line]
