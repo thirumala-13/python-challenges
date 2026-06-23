@@ -34,7 +34,8 @@ class Stack:
 
         Hint: self._items.append(item)
         """
-        pass
+        self._items.append(item)
+
 
     def pop(self):
         """
@@ -51,7 +52,9 @@ class Stack:
                 raise IndexError("Stack is empty")
             return self._items.pop()
         """
-        pass
+        if self.is_empty():
+            raise IndexError("Stack is empty")
+        return self._items.pop()
 
     def peek(self):
         """
@@ -65,7 +68,9 @@ class Stack:
 
         Hint: return self._items[-1]
         """
-        pass
+        if self.is_empty():
+            raise IndexError("Stack is empty")
+        return self._items[-1]
 
     def is_empty(self):
         """
@@ -79,7 +84,7 @@ class Stack:
 
         Hint: return len(self._items) == 0
         """
-        pass
+        return len(self._items) == 0
 
     def size(self):
         """
@@ -91,7 +96,7 @@ class Stack:
 
         Hint: return len(self._items)
         """
-        pass
+        return len(self._items)
 
 
 class Queue:
@@ -128,7 +133,7 @@ class Queue:
 
         Hint: self._items.append(item)
         """
-        pass
+        self._items.append(item)
 
     def dequeue(self):
         """
@@ -142,7 +147,9 @@ class Queue:
 
         Hint: return self._items.pop(0)  ← pop from index 0 removes the first item
         """
-        pass
+        if self.is_empty():
+            raise IndexError("Queue is empty")
+        return self._items.pop(0)
 
     def front(self):
         """
@@ -151,16 +158,18 @@ class Queue:
 
         Hint: return self._items[0]
         """
-        pass
+        if self.is_empty():
+            raise IndexError("Queue is empty")
+        return self._items[0]
 
     def is_empty(self):
         """
         TODO: Return True if the queue is empty, False otherwise.
         """
-        pass
+        return len(self._items) == 0
 
     def size(self):
         """
         TODO: Return the number of items in the queue.
         """
-        pass
+        return len(self._items)
