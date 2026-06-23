@@ -11,7 +11,9 @@ class Node:
 
     def __init__(self, value):
         # TODO: Store self.value = value and self.next = None
-        pass
+        self.value = value
+        self.next = None
+
 
 
 class LinkedList:
@@ -46,7 +48,14 @@ class LinkedList:
                 Traverse to the last node (where current.next is None)
                 Set last_node.next = new_node
         """
-        pass
+        new_node = Node(value)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            current.next = new_node
 
     def prepend(self, value):
         """
@@ -63,7 +72,10 @@ class LinkedList:
             new_node.next = self.head   ← new node points to old head
             self.head = new_node        ← new node becomes the head
         """
-        pass
+        new_node = Node(value)
+        new_node.next = self.head
+        self.head = new_node
+
 
     def delete(self, value):
         """
@@ -90,7 +102,23 @@ class LinkedList:
                     prev = current
                     current = current.next
         """
-        pass
+        if self.head is None:
+            return
+
+        if self.head.value == value:
+            self.head = self.head.next
+            return
+
+        prev = self.head
+        current = self.head.next
+
+        while current is not None:
+            if current.value == value:
+                prev.next = current.next
+                return
+            prev = current
+            current = current.next
+
 
     def contains(self, value):
         """
@@ -104,7 +132,12 @@ class LinkedList:
 
         Hint: Traverse the list and check each node's value.
         """
-        pass
+        current = self.head
+        while current is not None:
+            if current.value == value:
+                return True
+            current = current.next
+        return False
 
     def to_list(self):
         """
@@ -123,7 +156,12 @@ class LinkedList:
                 current = current.next
             return result
         """
-        pass
+        result = []
+        current = self.head
+        while current is not None:
+            result.append(current.value)
+            current = current.next
+        return result
 
     def length(self):
         """
@@ -132,7 +170,7 @@ class LinkedList:
 
         Hint: Traverse and count, or use len(self.to_list()).
         """
-        pass
+        return len(self.to_list())
 
     def reverse(self):
         """
@@ -157,4 +195,13 @@ class LinkedList:
 
             self.head = prev   ← prev is now the new head
         """
-        pass
+        prev = None
+        current = self.head
+
+        while current is not None:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+
+        self.head = prev
