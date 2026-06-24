@@ -30,7 +30,16 @@ def memoize(func):
         wrapper.cache = cache  ← expose cache for inspection in tests
         return wrapper
     """
-    pass
+    cache = {}
+
+    @functools.wraps(func)
+    def wrapper(*args):
+        if args not in cache:
+            cache[args] = func(*args)
+        return cache[args]
+
+    wrapper.cache = cache
+    return wrapper
 
 
 def fibonacci_naive(n):
@@ -47,7 +56,11 @@ def fibonacci_naive(n):
         fibonacci_naive(1) → 1
         fibonacci_naive(10) → 55
     """
-    pass
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fibonacci_naive(n - 1) + fibonacci_naive(n - 2)
 
 
 @functools.lru_cache(maxsize=None)
@@ -63,7 +76,11 @@ def fibonacci_cached(n):
     Example:
         fibonacci_cached(50) → 12586269025  (instant due to caching)
     """
-    pass
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fibonacci_cached(n - 1) + fibonacci_cached(n - 2)
 
 
 class Cache:
@@ -98,14 +115,16 @@ class Cache:
             self._store = {}       ← key: value
             self._order = []       ← tracks insertion order (oldest first)
         """
-        pass
+        self.max_size = max_size
+        self._store = {}
+        self._order = []
 
     def get(self, key):
         """
         TODO:
         Return value for key, or None if not found.
         """
-        pass
+        return self._store.get(key)
 
     def set(self, key, value):
         """
@@ -117,25 +136,37 @@ class Cache:
             If at max capacity: evict the OLDEST key (_order[0])
             Add new key and append to _order
         """
-        pass
+        if key in self._store:
+            self._store[key] = value
+        else:
+            if len(self._store) >= self.max_size:
+                oldest_key = self._order.pop(0)
+                del self._store[oldest_key]
+            self._store[key] = value
+            self._order.append(key)
 
     def delete(self, key):
         """
         TODO:
         Remove key from cache if it exists.
         """
-        pass
+        if key in self._store:
+            del self._store[key]
+            self._order.remove(key)
 
     def clear(self):
         """
         TODO:
         Empty the cache completely.
         """
-        pass
+        self._store.clear()
+        self._order.clear()
 
     def size(self):
         """
         TODO:
         Return number of items currently in cache.
         """
-        pass
+        return len(self._store)
+    
+    
