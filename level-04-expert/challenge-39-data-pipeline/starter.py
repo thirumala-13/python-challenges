@@ -1,7 +1,6 @@
 import csv
 import os
 
-
 def extract_csv(filepath):
     """
     TODO:
@@ -24,7 +23,11 @@ def extract_csv(filepath):
             reader = csv.DictReader(f)
             return list(reader)
     """
-    pass
+    if not os.path.exists(filepath):
+        return []
+    with open(filepath, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        return list(reader) 
 
 
 def clean_record(record):
@@ -48,7 +51,10 @@ def clean_record(record):
         cleaned["years"] = int(cleaned["years"])
         return cleaned
     """
-    pass
+    cleaned = {k.strip(): v.strip() if isinstance(v, str) else v for k, v in record.items()}
+    cleaned["salary"] = float(cleaned["salary"])
+    cleaned["years"] = int(cleaned["years"])
+    return cleaned
 
 
 def filter_records(records, **criteria):
@@ -70,7 +76,10 @@ def filter_records(records, **criteria):
             if all(r.get(key) == value for key, value in criteria.items())
         ]
     """
-    pass
+    return [
+        r for r in records
+        if all(r.get(key) == value for key, value in criteria.items())
+    ]
 
 
 def transform_salaries(records, multiplier):
@@ -86,7 +95,7 @@ def transform_salaries(records, multiplier):
     Hint:
         return [{**r, "salary": round(r["salary"] * multiplier, 2)} for r in records]
     """
-    pass
+    return [{**r, "salary": round(r["salary"] * multiplier, 2)} for r in records]
 
 
 def aggregate_by_department(records):
@@ -127,7 +136,22 @@ def aggregate_by_department(records):
             }
         return result
     """
-    pass
+    groups = {}
+    for record in records:
+        dept = record["department"]
+        if dept not in groups:
+            groups[dept] = []
+        groups[dept].append(record["salary"])
+
+    result = {}
+    for dept, salaries in groups.items():
+        total = sum(salaries)
+        result[dept] = {
+            "count": len(salaries),
+            "total_salary": total,
+            "avg_salary": round(total / len(salaries), 2)
+        }
+    return result
 
 
 def run_pipeline(filepath):
@@ -149,4 +173,10 @@ def run_pipeline(filepath):
         result["total_records"]  → 4
         result["departments"]["Engineering"]["count"]  → 2
     """
-    pass
+    records = extract_csv(filepath)
+    records = [clean_record(r) for r in records]
+    departments = aggregate_by_department(records)
+    return {
+        "total_records": len(records),
+        "departments": departments
+    }
