@@ -19,7 +19,10 @@ def load_tasks(filepath=DEFAULT_FILE):
         with open(filepath, "r") as f:
             return json.load(f)
     """
-    pass
+    if not os.path.exists(filepath):
+        return []
+    with open(filepath, "r") as f:
+        return json.load(f)
 
 
 def save_tasks(tasks, filepath=DEFAULT_FILE):
@@ -31,7 +34,8 @@ def save_tasks(tasks, filepath=DEFAULT_FILE):
         with open(filepath, "w") as f:
             json.dump(tasks, f, indent=2)
     """
-    pass
+    with open(filepath, "w") as f:
+        json.dump(tasks, f, indent=2)
 
 
 def add_task(title, priority="medium", filepath=DEFAULT_FILE):
@@ -57,7 +61,12 @@ def add_task(title, priority="medium", filepath=DEFAULT_FILE):
         save_tasks(tasks, filepath)
         return task
     """
-    pass
+    tasks = load_tasks(filepath)
+    next_id = max(t["id"] for t in tasks) + 1 if tasks else 1
+    task = {"id": next_id, "title": title, "priority": priority, "done": False}
+    tasks.append(task)
+    save_tasks(tasks, filepath)
+    return task
 
 
 def list_tasks(priority=None, filepath=DEFAULT_FILE):
@@ -70,7 +79,10 @@ def list_tasks(priority=None, filepath=DEFAULT_FILE):
         list_tasks()             → all tasks
         list_tasks("high")       → only high-priority tasks
     """
-    pass
+    tasks = load_tasks(filepath)
+    if priority is not None:
+        tasks = [task for task in tasks if task["priority"] == priority]
+    return tasks
 
 
 def complete_task(task_id, filepath=DEFAULT_FILE):
@@ -88,7 +100,13 @@ def complete_task(task_id, filepath=DEFAULT_FILE):
                 return True
         return False
     """
-    pass
+    tasks = load_tasks(filepath)
+    for task in tasks:
+        if task["id"] == task_id:
+            task["done"] = True
+            save_tasks(tasks, filepath)
+            return True
+    return False
 
 
 def delete_task(task_id, filepath=DEFAULT_FILE):
@@ -106,52 +124,54 @@ def delete_task(task_id, filepath=DEFAULT_FILE):
         save_tasks(tasks, filepath)
         return True
     """
-    pass
+    tasks = load_tasks(filepath)
+    original_len = len(tasks)
+    tasks = [t for t in tasks if t["id"] != task_id]
+    if len(tasks) == original_len:
+        return False
+    save_tasks(tasks, filepath)
+    return True
 
 
 def build_parser():
-    """
-    TODO:
-    Build and return an argparse.ArgumentParser with subcommands:
-
-    Subcommand: add
-        Positional: title (str)
-        Optional: --priority (choices: high, medium, low; default: medium)
-
-    Subcommand: list
-        Optional: --priority (choices: high, medium, low)
-
-    Subcommand: complete
-        Positional: id (int)
-
-    Subcommand: delete
-        Positional: id (int)
-    """
     parser = argparse.ArgumentParser(
         prog="tasks",
         description="Simple task manager CLI"
     )
+
     subparsers = parser.add_subparsers(dest="command")
 
-    # TODO: add subcommand
-    # add_parser = subparsers.add_parser("add", help="Add a new task")
-    # add_parser.add_argument("title", help="Task title")
-    # add_parser.add_argument("--priority", choices=["high", "medium", "low"], default="medium")
+    # add subcommand
+    add_parser = subparsers.add_parser("add", help="Add a new task")
+    add_parser.add_argument("title", help="Task title")
+    add_parser.add_argument(
+        "--priority",
+        choices=["high", "medium", "low"],
+        default="medium"
+    )
 
-    # TODO: list subcommand
-    # list_parser = subparsers.add_parser("list", help="List tasks")
-    # list_parser.add_argument("--priority", choices=["high", "medium", "low"])
+    # list subcommand
+    list_parser = subparsers.add_parser("list", help="List tasks")
+    list_parser.add_argument(
+        "--priority",
+        choices=["high", "medium", "low"]
+    )
 
-    # TODO: complete subcommand
-    # complete_parser = subparsers.add_parser("complete", help="Mark task as complete")
-    # complete_parser.add_argument("id", type=int)
+    # complete subcommand
+    complete_parser = subparsers.add_parser(
+        "complete",
+        help="Mark task as complete"
+    )
+    complete_parser.add_argument("id", type=int)
 
-    # TODO: delete subcommand
-    # delete_parser = subparsers.add_parser("delete", help="Delete a task")
-    # delete_parser.add_argument("id", type=int)
+    # delete subcommand
+    delete_parser = subparsers.add_parser(
+        "delete",
+        help="Delete a task"
+    )
+    delete_parser.add_argument("id", type=int)
 
     return parser
-
 
 def main():
     """
@@ -184,3 +204,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
