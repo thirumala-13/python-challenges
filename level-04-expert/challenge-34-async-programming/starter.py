@@ -15,7 +15,9 @@ async def async_greet(name, delay=0):
             await asyncio.sleep(delay)
             return f"Hello, {name}!"
     """
-    pass
+    await asyncio.sleep(delay)
+    return f"Hello, {name}!"
+
 
 
 async def fetch_multiple(names, delay=0):
@@ -36,7 +38,10 @@ async def fetch_multiple(names, delay=0):
         results = await asyncio.gather(*coroutines)
         return list(results)
     """
-    pass
+    coroutines = [async_greet(name, delay) for name in names]
+    results = await asyncio.gather(*coroutines)
+    return list(results)
+
 
 
 async def async_countdown(start):
@@ -55,7 +60,9 @@ async def async_countdown(start):
             await asyncio.sleep(0)   ← yield control briefly
             yield i
     """
-    pass
+    for i in range(start, 0, -1):
+        await asyncio.sleep(0)
+        yield i
 
 
 async def run_with_timeout(coro, timeout):
@@ -80,4 +87,8 @@ async def run_with_timeout(coro, timeout):
         except asyncio.TimeoutError:
             return None
     """
-    pass
+    try:
+        return await asyncio.wait_for(coro, timeout=timeout)
+    except asyncio.TimeoutError:
+        return None
+    
