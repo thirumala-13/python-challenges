@@ -28,7 +28,22 @@ def merge(left, right):
         result.extend(right[j:])
         return result
     """
-    pass
+    result = []
+    i = 0
+    j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
 
 
 def merge_sort(arr):
@@ -55,7 +70,13 @@ def merge_sort(arr):
             3. Merge and return:
                return merge(left, right)
     """
-    pass
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
 
 
 def merge_sort_inplace(arr):
@@ -78,4 +99,10 @@ def merge_sort_inplace(arr):
         arr.extend(sorted_arr)
         (This modifies the original list)
     """
-    pass
+    sorted_arr = merge_sort(arr)
+
+    for i in range(len(arr)):
+        arr[i] = sorted_arr[i]
+
+    return arr
+
