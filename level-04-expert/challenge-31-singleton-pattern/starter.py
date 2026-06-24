@@ -24,7 +24,10 @@ class Singleton:
 
     def __new__(cls):
         # TODO: Return cls._instance if it exists, otherwise create it and store it
-        pass
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)    
+        return cls._instance
+    
 
 
 class AppConfig(Singleton):
@@ -57,19 +60,24 @@ class AppConfig(Singleton):
 
     def __init__(self):
         # TODO: Initialize _config dict only once (protect against re-initialization)
-        pass
+        #         pass
+        if not hasattr(self, '_initialized'):
+            self._initialized = True
+            self._config = {}
 
     def set(self, key, value):
         """
         TODO: Store value under key in self._config
         """
-        pass
+        self._config[key] = value
+
 
     def get(self, key, default=None):
         """
         TODO: Return self._config.get(key, default)
         """
-        pass
+        return self._config.get(key, default)
+    
 
 
 class Logger(Singleton):
@@ -94,22 +102,25 @@ class Logger(Singleton):
 
     def __init__(self):
         # TODO: Initialize _messages list only once
-        pass
+        if not hasattr(self, '_initialized'):
+            self._initialized = True
+            self._messages = []
 
     def log(self, message):
         """
         TODO: Append message to self._messages
         """
-        pass
+        self._messages.append(message)
+
 
     def get_logs(self):
         """
         TODO: Return self._messages
         """
-        pass
+        return self._messages
 
     def clear(self):
         """
         TODO: Clear all messages (self._messages = [])
         """
-        pass
+        self._messages = []
